@@ -5,32 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
     <title>Calculator</title>
 </head>
 <body>
+    <h1>Calculator</h1>
     <div class="container">
-        <h1>Calculator</h1>
-        <div>
-            <div class="screen"></div>
-            <div>
-                <button>AC</button>
-                <button>C</button>
-                <button>%</button>
-                <button>&div;</button>
+            <div class="screen">
+                <div data-previous-operand class="previous-operand"></div>
+                <div data-current-operand class="current-operand"></div>
             </div>
-            <div class="numbers">
-                <button>7</button>
-                <button>8</button>
-                <button>9</button>
-                <button>&times;</button>
-                <button>4</button>
-                <button>5</button>
-                <button>6</button>
-                <button>-</button>
-                <button>3</button>
-            </div>
-            </div>
-        </div>
-    </div> 
+                <button data-all-clear class="span-two">AC</button>
+
+                <button data-delete><svg stroke="currentColor" align-items="center"  fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"></path><line x1="18" y1="9" x2="12" y2="15"></line><line x1="12" y1="9" x2="18" y2="15"></line></svg></button>
+                <button data-operations>&div;</button>
+                <button data-number>7</button>
+                <button data-number>8</button>
+                <button data-number>9</button>
+                <button data-operations>&times;</button>
+                <button data-number>4</button>
+                <button data-number>5</button>
+                <button data-number>6</button>
+                <button data-operations>+</button>
+                <button data-number>1</button>
+                <button data-number>2</button>
+                <button data-number>3</button>
+                <button data-operations>-</button>
+                <button data-number>0</button>
+                <button data-number>.</button>
+                <button data-equals class="span-two">&equals;</button>
+    </div>
 </body>
-</html>
+</html> 
