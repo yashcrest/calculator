@@ -1,3 +1,4 @@
+//Defining Calculator class
 class Calculator {
     constructor(previousOperandTextElement, currentOperandTextElement){
         this.previousOperandTextElement = previousOperandTextElement;
@@ -12,7 +13,7 @@ class Calculator {
     }
 
     delete(){
-
+        this.currentOperand = this.currentOperand.toString().slice(0, -1);
     }
 
     appendNumber(number){
@@ -31,18 +32,57 @@ class Calculator {
     }
 
     compute(){
-
+        let computeResult 
+        let prev = parseFloat(this.previousOperand);
+        let current = parseFloat(this.currentOperand);
+        if(isNaN(prev) || isNaN(current)) return
+        switch(this.operation){
+            case '+' :
+                computeResult = prev + current
+                break
+            case '-' :
+                computeResult = prev - current
+                break
+            case '×' :
+                computeResult = prev * current
+                break
+            case '÷' :
+                computeResult = prev / current
+                break
+            default:
+                return  
+        }
+        this.currentOperand = computeResult;
+        this.operation = undefined
+        this.previousOperand = ''
     }
+
+    getDisplayNumber(number){
+        const stringNumber = number.toString()
+        const integerDigits = parseFloat(stringNumber.split('.')[0])
+        const decimalDigits = parseFloat(stringNumber.split('.')[1])
+        let integerDisplay
+       if(isNaN(integerDigits)){
+        integerDisplay = ''
+       }else{
+        integerDisplay =  integerDigits.toLocaleString('en',{
+            maximumFractionDigits : 0 })
+       } 
+    }
+
 
     updateDisplay(){
-        this.currentOperandTextElement.innerText = this.currentOperand;
-        this.previousOperandTextElement.innerText = this.previousOperand;
+        this.currentOperandTextElement.innerText = this.getDisplayNumber(this.currentOperand);
+        if(this.operation != null){
+            this.previousOperandTextElement.innerText = `${this.getDisplayNumber(this.previousOperand)}${this.operation}` 
+        } else {
+            this.previousOperandTextElement.innerText = '';
+        }
     }
-
 }
 
 
-
+//Mapping all the HTML tags
 const numbersBtn = document.querySelectorAll('[data-number]');
 const operationsBtn = document.querySelectorAll('[data-operations]');
 const allClearBtn = document.querySelector('[data-all-clear]');
@@ -63,7 +103,6 @@ const keys = {
     '7' : () => calculator.appendNumber('7'),
     '8' : () => calculator.appendNumber('8'),
     '9' : () => calculator.appendNumber('9'),
-    '0' : () => calculator.appendNumber('0'),
     '.' : () => calculator.chooseOperations('.'),
     '+' : () => calculator.chooseOperations('+'),
     '-' : () => calculator.chooseOperations('-'),
@@ -71,12 +110,14 @@ const keys = {
     '*' : () => calculator.chooseOperations('×'),
     "Enter" : () => calculator.compute(),
     "Backspace" : () => calculator.delete(),
-
 }
 
 
+//Creating Calculator Object
 const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement);
 
+
+//Any numbers button 
 numbersBtn.forEach(button => {
     button.addEventListener('click', ()=> {
         calculator.appendNumber(button.innerText);
@@ -84,7 +125,7 @@ numbersBtn.forEach(button => {
     })
 })
 
-
+//Any Operations button
 operationsBtn.forEach(button =>{
     button.addEventListener('click', ()=>{
         calculator.chooseOperations(button.innerText);
@@ -92,15 +133,29 @@ operationsBtn.forEach(button =>{
     })
 })
 
-
+//AC button
 allClearBtn.addEventListener('click' , ()=>{
     calculator.clear();
+    calculator.updateDisplay();
 })
 
 
+//Delete button
+deleteBtn.addEventListener('click' , (button)=> {
+    calculator.delete();
+    calculator.updateDisplay();
+})
+
+//euqals button
+equalsBtn.addEventListener('click' , ()=> {
+    calculator.compute();
+    calculator.updateDisplay();
+})
+
+
+
 document.addEventListener('keyup', (e) => {
-    const key = e.key;
-    const button = keys[key];
+    const button = keys[e.key];
 
     if (button) {
         button();

@@ -27,6 +27,11 @@ body {
     padding: 1.5em;
 } 
 
+h1{
+    font-size: 60px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
 .screen{
     grid-column: 1 / -1;
     display: flex; 
@@ -39,6 +44,7 @@ body {
     padding: 10px;
     margin-bottom: 1em;
 }
+
 
 button {
     cursor: pointer;
@@ -65,4 +71,5 @@ button:hover {
 
 .current-operand {
     font-size: 2.5rem;
+    
 }
