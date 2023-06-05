@@ -72,7 +72,7 @@ class Calculator {
        if(decimalDigits != null){
         return `${integerDisplay}.${decimalDigits}`;
        } else {
-        return integerDisplay;
+        return integerDisplay
        }
     }
 
@@ -80,7 +80,7 @@ class Calculator {
     updateDisplay(){
         this.currentOperandTextElement.innerText = this.getDisplayNumber(this.currentOperand);
         if(this.operation != null){
-            this.previousOperandTextElement.innerText = `${this.getDisplayNumber(this.previousOpefrand)}${this.operation}` 
+            this.previousOperandTextElement.innerText = `${this.getDisplayNumber(this.previousOperand)}${this.operation}` 
         } else {
             this.previousOperandTextElement.innerText = '';
         }
