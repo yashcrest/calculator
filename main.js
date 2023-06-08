@@ -4,6 +4,7 @@ class Calculator {
         this.previousOperandTextElement = previousOperandTextElement;
         this.currentOperandTextElement = currentOperandTextElement;
         this.clear()
+        this.currentStatus = false;
     }
 
     clear(){
@@ -17,6 +18,11 @@ class Calculator {
     }
 
     appendNumber(number){
+        if (this.currentStatus){
+            this.currentOperand = ''
+            this.currentStatus = false;
+        }
+
         if( number === '.' && this.currentOperand.includes('.')) return
         this.currentOperand = this.currentOperand.toString() + number.toString();
     }
@@ -55,6 +61,7 @@ class Calculator {
         this.currentOperand = computeResult;
         this.operation = undefined
         this.previousOperand = ''
+        this.currentStatus = true;
     }
 
     getDisplayNumber(number){
